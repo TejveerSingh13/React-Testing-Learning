@@ -13,4 +13,8 @@ One is not an alternative of other but both are needed.
 
 **RTL :** Combination of Unit test and E2E in a sense they resemble the way a user would interact with the component. We do not concern about the implementation detail. We are testing how the component behaves when a user interct with it. Can be classified as Functional testing. Example if 8 is calculated as 4+4 or 5+3 we wont care about how 8 was generated but we would care if the user sees the 8 or no.   
 
-
+## Anatomy of a test
+`test(name, fn, timeout)`   
+1st argument : name: Test name use to identify test.
+2nd argument : fn: fucntion containing the expectations to test.
+3rd argument : timeout: optional argument to tell how long to wait before aborting.
