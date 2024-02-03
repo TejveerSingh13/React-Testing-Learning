@@ -15,6 +15,6 @@ One is not an alternative of other but both are needed.
 
 ## Anatomy of a test
 `test(name, fn, timeout)`   
-1st argument : name: Test name use to identify test.
-2nd argument : fn: fucntion containing the expectations to test.
-3rd argument : timeout: optional argument to tell how long to wait before aborting.
+**1st argument : name:** Test name use to identify test.   
+**2nd argument : fn:** fucntion containing the expectations to test.    
+**3rd argument : timeout:** optional argument to tell how long to wait before aborting. Default 5s.    
