@@ -16,15 +16,26 @@ test("Greet renders Correctly!", () => {
  */
 
 // Here we just wrote the test and then created the component
+/**
+ * Group tests with describe
+ * name, fucntion contaning tests
+ * describe can be nested.
+ */
+describe("Greet", () => {
+  test("Renders Correctly - TDD", () => {
+    render(<Greet />);
+    const textELement = screen.getByText(/Greet/i);
+    expect(textELement).toBeInTheDocument();
+  });
 
-test("Greet renders Correctly - TDD", () => {
-  render(<Greet />);
-  const textELement = screen.getByText(/Greet/i);
-  expect(textELement).toBeInTheDocument();
-});
+  // test.only to run specific test and skip rest
+  // OR test.skip to skip a specific test and run rest
 
-test("Greet renders with a name Correctly - TDD", () => {
-  render(<Greet name="Tejveer" />);
-  const textELement = screen.getByText(/Greet Tejveer/i);
-  expect(textELement).toBeInTheDocument();
+  // we can use it instead of test, fit == test.only; xit == test.skip
+
+  it("Renders with a name Correctly - TDD", () => {
+    render(<Greet name="Tejveer" />);
+    const textELement = screen.getByText(/Greet Tejveer/i);
+    expect(textELement).toBeInTheDocument();
+  });
 });
