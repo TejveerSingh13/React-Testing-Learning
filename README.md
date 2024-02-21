@@ -87,3 +87,48 @@ Only for element tha suppport alt field.
 
  ## IMPORTANT !!!!!!
 **When to use which -** Priority order -> 1(global) -> 2(Good for form Fields) -> 3 -> 4(outside forms/ find non interactive elements) -> 5 (Mostly we should get all test elements with the pervious 5)-> 6,7 -> 8(recommented when pervious not work or when **dynamic text**)   
+
+## Methods to find MULTIPLE elements on page (getAllBy)
+### every getBy query has its own getAllBy query 
+
+The first parameter in the above query is called as a `TextMatch`. It is not a string only field.    
+textMatch can be string, regex or a function
+
+**Example HTML for below : <div>Hello World<div/>**
+
+#### TextMatch - String ex
+```typescript
+screen.getByText('Hello World') // full string match
+screen.getByText('llo Wor', {exact: false}) //substring match
+screen.getByText('hello world', {exact: false}) //ignore case too
+```
+#### TextMatch - Regex ex
+```typescript
+screen.getByText(/Hello World/) // substring match
+screen.getByText(/Hello World/i) // substring match ignore case
+```
+#### TextMatch - Function ex
+(content?: string, element?:Element | null) => boolean
+```typescript
+screen.getByText((content) => content.startsWith('Hello') ) // substring match
+```
+## Methods to find elements on page (queryBy and queryAllBy)
+Why the need of aobve? Since if the element is not rendered in the DOM getBy and getAllBy throws an error.     
+To make sure an element is not persent in the DOM. returns null if the element not match instead of an error.
+
+## Methods to find elements on page (findBy and findAllBy) <- Used while working with async code
+The above methods getBy and queryBy wont be able to find element that Appear or Disappear, like one which render after a delay or get removed after a time interval.
+**finBy** returns a promise which resolev when element found and is rejected by a default timeout of 1000ms if element not found
+```typescript
+test("start learning is eventually displayed", async () => {
+    render(<Skills skills={skills} />);
+    const SLButton = await screen.findByRole(
+      "button",
+      {
+        name: "Start learning",
+      },
+      { timeout: 2000 }
+    );
+    expect(SLButton).toBeInTheDocument();
+  });
+```
